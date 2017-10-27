@@ -1,8 +1,8 @@
 {
   "name": "json-cfg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The json configuration holder for developers who need to load configurations from json files and share the loaded configurations within the whole project",
-  "main": "json.js",
+  "main": "json-cfg.js",
   "scripts": {
     "test": "node ./test/test.js"
   },
