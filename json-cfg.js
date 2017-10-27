@@ -1,5 +1,29 @@
 (()=>{
 	"use strict";
+	
+	// Synchronize all json-cfg modules to make config be the same in the tree
+	{
+		let travel = module.parent.parent;
+		let locked = null;
+		while(travel) {
+			try {
+				locked = travel.require( 'json-cfg' );
+				break;
+			}
+			catch(e) {}
+			
+			travel = travel.parent;
+		}
+		
+		if ( locked ) {
+			module.exports = locked;
+			return;
+		}
+	}
+	
+	
+	
+	
 	const fs = require( 'fs' );
 	
 	
