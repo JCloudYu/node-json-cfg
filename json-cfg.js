@@ -7,7 +7,10 @@
 		let locked = null;
 		while(travel) {
 			try {
-				locked = travel.require( 'json-cfg' );
+				if ( travel.___JSON_CFG_REGISTERED_ROOT || false ) {
+					locked = travel.require( 'json-cfg' );
+				}
+				
 				break;
 			}
 			catch(e) {}
@@ -18,6 +21,9 @@
 		if ( locked ) {
 			module.exports = locked;
 			return;
+		}
+		else {
+			module.parent.___JSON_CFG_REGISTERED_ROOT = true;
 		}
 	}
 	
