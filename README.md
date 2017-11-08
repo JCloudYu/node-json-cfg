@@ -5,7 +5,7 @@ This module is designed to provide a more convenient shared configuration system
 ## Overview ##
 When coding in nodejs environment, you may encounter conditions in which you need to keep track all configurations among submodules. To fulfill the requirement, you may come up with a customized module. But typically, even the main module and the submodules are dependent to the same customized module, you'll end up with modules with different instances. This is very frustrating...
 
-No worry, this module is designed to solve the above situation. As long as you include the module with the same version, you'll have a shared configuration storage for all your modules and submodules.
+No worry, this module is also designed to solve the above situation. As long as you include the module with the same version, you'll have the ability to share configuration storage among all your modules and submodules.
 
 
 
@@ -99,6 +99,14 @@ module.exports = {
 	}
 };
 ```
+
+### Accessing the Shared Space ###
+You can get the shared configuration space using following line
+
+```javascript
+let shared = config.trunk;
+```
+
 
 ### Separated Spaces ###
 
