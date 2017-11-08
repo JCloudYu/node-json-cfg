@@ -2,35 +2,19 @@
 	"use strict";
 	
 	// Synchronize all json-cfg modules to make config be the same in the tree
+	let __ROOT_ANCHOR = {};
 	{
-		let travel = module.parent.parent;
-		let locked = null;
-		while(travel) {
-			try {
-				if ( travel.___JSON_CFG_REGISTERED_ROOT || false ) {
-					locked = travel.require( 'json-cfg' );
-				}
-				
-				break;
-			}
-			catch(e) {}
-			
+		let travel = module;
+		while(travel.parent) {
 			travel = travel.parent;
 		}
 		
-		if ( locked ) {
-			module.exports = locked;
-			return;
-		}
-		else {
-			module.parent.___JSON_CFG_REGISTERED_ROOT = true;
-		}
+		__ROOT_ANCHOR = travel.__module_trunk = travel.__module_trunk || {};
 	}
 	
-	
-	
-	
 	const fs = require( 'fs' );
+	const singleton = __ROOT_ANCHOR[ 'json-cfg' ] || __GEN_CONFIG();
+	__ROOT_ANCHOR[ 'json-cfg' ] = singleton;
 	
 	
 	
@@ -60,6 +44,10 @@
 				return exports;
 			},
 			writable:false, enumerable:false, configurable:true
+		},
+		trunk: {
+			get:()=>{ return singleton; },
+			enumerable:false, configurable:true
 		}
 	});
 	
@@ -109,7 +97,6 @@
 	
 		return confInst;
 	}
-	
 	function __LOAD_JSON_OBJECT(path){
 		try {
 			fs.accessSync(path, fs.constants.F_OK | fs.constants.R_OK);
