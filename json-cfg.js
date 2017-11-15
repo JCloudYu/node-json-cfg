@@ -2,15 +2,13 @@
 	"use strict";
 	
 	// Synchronize all json-cfg modules to make config be the same in the tree
-	let __ROOT_ANCHOR = {};
-	{
-		let travel = module;
-		while(travel.parent) {
-			travel = travel.parent;
-		}
-		
-		__ROOT_ANCHOR = travel.__module_trunk = travel.__module_trunk || {};
+	let travel = module;
+	while(travel.parent) {
+		travel = travel.parent;
 	}
+	let __ROOT_ANCHOR = travel.__module_trunk = travel.__module_trunk || {};
+	
+	
 	
 	const fs = require( 'fs' );
 	const singleton = __ROOT_ANCHOR[ 'json-cfg' ] || __GEN_CONFIG();
@@ -19,7 +17,7 @@
 	
 	
 	let __instances = {};
-	let exports = module.exports = __GEN_CONFIG();
+	const exports = __GEN_CONFIG();
 	Object.defineProperties(exports, {
 		obtain:{
 			value:(identifier)=>{
@@ -52,6 +50,8 @@
 	});
 	
 	
+	
+	module.exports = exports;
 	
 	function __GEN_CONFIG(){
 		const confInst = {};
