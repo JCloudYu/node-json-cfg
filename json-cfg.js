@@ -71,21 +71,21 @@
 						__config[idx] = config[idx];
 					}
 					
-					return exports;
+					return confInst;
 				},
 				writable:false, enumerable:true, configurable:false
 			},
 			save:{
 				value:function(path){
 					fs.writeFileSync(path, JSON.stringify(__config), {encoding:'utf8'});
-					return exports;
+					return confInst;
 				},
 				writable:false, enumerable:true, configurable:false
 			},
 			reset:{
 				value:function(){
 					__config = {};
-					return exports;
+					return confInst;
 				},
 				writable:false, enumerable:true, configurable:false
 			},
